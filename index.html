@@ -12,41 +12,88 @@
     <div class="container">
         <div class="screen">
             <div class="title">Calculator</div>
-            <div class="history"><i class="fas fa-history"></i></div>
-            <div class="number-frame">1,500,983</div>
+            <button class="btn history"><i class="fas fa-history"></i></button>
+            <div class="number-frame">0</div>
         </div>
         <div class="button-container">
             <div class="buttons">
-                <div class="btn operator" id="percent">&percnt;</i></div>
-                <div class="btn operator" id="ce">CE</div>
-                <div class="btn operator" id="clear">C</div>
-                <div class="btn operator" id="del"><i class="fas fa-backspace"></i></div>
-                <div class="btn operator" id="one-over-x">&sup1;/&#119909;</div>
-                <div class="btn operator" id="x-squred">&#119909;&sup2;</div>
-                <div class="btn operator" id="sqrt">&sup2;&Sqrt;&#119909;</i></div>
-                <div class="btn operator" id="divide">&divide;</i></div>
-                <div class="btn number">7</div>
-                <div class="btn number">8</div>
-                <div class="btn number">9</div>
-                <div class="btn operator" id="multiply">&times;</div>
-                <div class="btn number">4</div>
-                <div class="btn number">5</div>
-                <div class="btn number">6</div>
-                <div class="btn operator" id="subtract">&minus;</i></div>
-                <div class="btn number">1</div>
-                <div class="btn number">2</div>
-                <div class="btn number">3</div>
-                <div class="btn operator" id="add">&plus;</i></div>
-                <div class="btn operator" id="plus-minus">+/-</div>
-                <div class="btn number">0</div>
-                <div class="btn operator" id="point">&period;</div>
-                <div class="btn operator" id="equal">&equals;</i></div>
+                <button class="btn operator" id="percent">&percnt;</i></button>
+                <button class="btn operator" id="ce">CE</button>
+                <button class="btn operator" id="clear">C</button>
+                <button class="btn operator" id="del"><i class="fas fa-backspace"></i></button>
+                <button class="btn operator" id="one-over-x">&sup1;/&#119909;</button>
+                <button class="btn operator" id="x-squred">&#119909;&sup2;</button>
+                <button class="btn operator" id="sqrt">&sup2;&Sqrt;&#119909;</i></button>
+                <button class="btn operator" id="divide">&divide;</i></button>
+                <button class="btn number" id="7">7</button>
+                <button class="btn number" id="8">8</button>
+                <button class="btn number" id="9">9</button>
+                <button class="btn operator" id="multiply">&times;</button>
+                <button class="btn number" id="4">4</button>
+                <button class="btn number" id="5">5</button>
+                <button class="btn number" id="6">6</button>
+                <button class="btn operator" id="subtract">&minus;</i></button>
+                <button class="btn number" id="1">1</button>
+                <button class="btn number" id="2">2</button>
+                <button class="btn number" id="3">3</button>
+                <button class="btn operator" id="add">&plus;</i></button>
+                <button class="btn operator" id="plus-minus">+/-</button>
+                <button class="btn number" id="0">0</button>
+                <button class="btn operator" id="point">&period;</button>
+                <button class="btn operator" id="equal">&equals;</i></button>
             </div>
         </div>  
     </div>
     
     
     <script>
+        let numberDisplay = "";
+        const numberFrame = document.querySelector(".number-frame")
+        
+        const numberKeys = document.querySelectorAll(".number")
+            numberKeys.forEach((button) => {
+
+                button.addEventListener('click', () => {
+                    console.log(numberDisplay);
+                    number(button.id);
+                });
+            });
+      
+        // function operator(operation) {
+        //     console.log(typeof(operation));
+        //     if(operation =="clear") {clear();};
+         
+
+
+        // }
+
+        function number(input) {
+            numberDisplay += input;
+            numberFrame.textContent = numberDisplay;
+        }
+
+        function add() {
+
+        }
+
+        function subtract() {
+
+        }
+
+        function multiply() {
+
+        }
+
+        function divide() {
+
+        }
+
+        function clear() {
+            numberDisplay = "";
+            numberFrame.textContent = numberDisplay;
+        }
+       
+
 
     </script>
 </body>

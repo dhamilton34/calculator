@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Nova+Square&display=swap')
+@import url('https://fonts.googleapis.com/css2?family=Nova+Square&display=swap');
 
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
@@ -26,6 +26,7 @@ time, mark, audio, video {
 	font: inherit;
 	vertical-align: baseline;
 }
+
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {
@@ -85,12 +86,7 @@ body {
     font-weight: bold;
 }
 
-.history {
-    padding: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+
 
 .number-frame {
     grid-column: 1 / 3;
@@ -131,6 +127,15 @@ body {
     align-items: center;
     font-family: 'Nova Square', cursive;
     font-weight: bold; 
+    border: none;
+}
+
+.history {
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: lightgray;
 }
 
 .operator {
