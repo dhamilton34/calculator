@@ -39,7 +39,7 @@
                 <button class="btn operator" id="add">&plus;</i></button>
                 <button class="btn operator" id="plus-minus">+/-</button>
                 <button class="btn number" id="0">0</button>
-                <button class="btn operator" id="point">&period;</button>
+                <button class="btn number" id=".">&period;</button>
                 <button class="btn operator" id="equal">&equals;</i></button>
             </div>
         </div>  
@@ -50,15 +50,32 @@
         let numberDisplay = "";
         const numberFrame = document.querySelector(".number-frame")
         
+        //Adds EventListeners to all number buttons => Calls number function
         const numberKeys = document.querySelectorAll(".number")
             numberKeys.forEach((button) => {
 
                 button.addEventListener('click', () => {
-                    console.log(numberDisplay);
+                    console.log(button.id);
                     number(button.id);
                 });
             });
-      
+
+        //Adds EventListeners to all operator buttons => Calls operator function
+        const operatorKeys = document.querySelectorAll(".operator")
+            operatorKeys.forEach((button) => {
+
+                button.addEventListener('click', () => {
+                    
+                    console.log(button.id);
+                    //operator(button.id);
+                });
+            });
+
+
+        function operate(operator, a, b) {
+            
+        }
+
         // function operator(operation) {
         //     console.log(typeof(operation));
         //     if(operation =="clear") {clear();};

@@ -96,6 +96,8 @@ body {
     padding: 20px;
     font-size: 4em;
     font-family: 'Nova Square', cursive;
+    overflow: auto;
+    overflow-wrap: anywhere;
 }
 
 
