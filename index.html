@@ -48,8 +48,12 @@
     
     <script>
         let numberDisplay = "";
+        let numInputs = [];
+        let currentValue = "";
+        let nextValue = "";
         const numberFrame = document.querySelector(".number-frame")
         
+       
         //Adds EventListeners to all number buttons => Calls number function
         const numberKeys = document.querySelectorAll(".number")
             numberKeys.forEach((button) => {
@@ -67,7 +71,7 @@
                 button.addEventListener('click', () => {
                     
                     console.log(button.id);
-                    //operator(button.id);
+                    operator(button.id);
                 });
             });
 
@@ -76,20 +80,37 @@
             
         }
 
-        // function operator(operation) {
-        //     console.log(typeof(operation));
-        //     if(operation =="clear") {clear();};
+        function operator(operation) {
+            console.log(typeof(operation));
+            if(operation =="clear") {clear();};
+            if(operation =="del") {del();};
          
 
 
-        // }
+        }
 
         function number(input) {
-            numberDisplay += input;
-            numberFrame.textContent = numberDisplay;
+            
+           if(numberDisplay.length < 15) {
+                numInputs.push(input);
+                //dnumberDisplay += input;
+                numberDisplay = numInputs.join("");
+                numberFrame.textContent = parseInt(numberDisplay).toLocaleString('en-US');
+           }
+
+           if(numberDisplay.length > 10) {
+               numberFrame.style.fontSize = "3.25em";
+           }
+
+           if(numberDisplay.length > 13) {
+               numberFrame.style.fontSize = "3em";
+           }
+           console.log({numInputs});
+           console.log({numberDisplay});
         }
 
         function add() {
+           let a = numberDisplay;
 
         }
 
@@ -106,8 +127,19 @@
         }
 
         function clear() {
+            numInputs = [];
             numberDisplay = "";
             numberFrame.textContent = numberDisplay;
+        }
+
+        function del() {
+            if(numInputs.length > 1) {numInputs.pop();};
+           // if(numInputs.length = 1) {number(0);};
+            numberDisplay = numInputs.join("");
+            //if(numInputs.length === 0) {number(0);};
+            numberFrame.textContent = parseInt(numberDisplay).toLocaleString('en-US');
+            console.log(numInputs);
+            console.log(numberDisplay);
         }
        
 
