@@ -13,6 +13,7 @@
         <div class="screen">
             <div class="title">Calculator</div>
             <button class="btn history"><i class="fas fa-history"></i></button>
+            <div class="calc-tracker"></div>
             <div class="number-frame">0</div>
         </div>
         <div class="button-container">
@@ -49,9 +50,11 @@
     <script>
         let numberDisplay = "";
         let numInputs = [];
+        let calcDisplay = [];
         let currentValue = "";
         let nextValue = "";
-        const numberFrame = document.querySelector(".number-frame")
+        const numberFrame = document.querySelector(".number-frame");
+        const calcTrack = document.querySelector(".calc-tracker");
         
        
         //Adds EventListeners to all number buttons => Calls number function
@@ -84,6 +87,7 @@
             console.log(typeof(operation));
             if(operation =="clear") {clear();};
             if(operation =="del") {del();};
+            if(operation =="add") {add();};
          
 
 
@@ -109,8 +113,20 @@
            console.log({numberDisplay});
         }
 
+        function calcTracker(sign) {
+            calcDisplay.push(currentValue);
+            if(sign == "plus") {calcDisplay.push("+");}
+            calcTrack.textContent = calcDisplay.join("");
+        }
+
         function add() {
-           let a = numberDisplay;
+            console.log({currentValue});
+            if(currentValue != "") {nextValue = numberDisplay;};
+            if(currentValue == "") { currentValue = numberDisplay;};
+            calcTracker('plus');
+            console.log({currentValue});
+            console.log({nextValue});
+        
 
         }
 
@@ -128,8 +144,12 @@
 
         function clear() {
             numInputs = [];
+            calcDisplay = [];
             numberDisplay = "";
+            currentValue = "";
+            nextValue = "";
             numberFrame.textContent = numberDisplay;
+            calcTrack.textContent = currentValue;
         }
 
         function del() {
