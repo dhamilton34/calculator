@@ -74,32 +74,51 @@
                 button.addEventListener('click', () => {
                     
                     console.log(button.id);
-                    operator(button.id);
+                    //operator(button.id);
+                    window[button.id]();
                 });
             });
 
 
-        function operate(operator, a, b) {
+        // function operate(operator, a, b) {
             
-        }
+        // }
 
-        function operator(operation) {
-            console.log(typeof(operation));
-            if(operation =="clear") {clear();};
-            if(operation =="del") {del();};
-            if(operation =="add") {add();};
+        // /function operator(operation) {
+           
+
+        //    /* if(operation =="clear") {clear();};
+        //     if(operation =="del") {del();};
+        //     if(operation =="add") {add();};
+        //     if(operation =="equal") {equal();};*/
          
 
 
-        }
+        // }
 
         function number(input) {
             
            if(numberDisplay.length < 15) {
-                numInputs.push(input);
-                //dnumberDisplay += input;
-                numberDisplay = numInputs.join("");
-                numberFrame.textContent = parseInt(numberDisplay).toLocaleString('en-US');
+               
+                    numInputs.push(input);
+                    //dnumberDisplay += input;
+                    numberDisplay = numInputs.join("");
+                    numberFrame.textContent = parseInt(numberDisplay).toLocaleString('en-US');
+                
+              
+                // if(currentValue == "") {
+                //     numInputs.push(input);
+                //     //dnumberDisplay += input;
+                //     numberDisplay = numInputs.join("");
+                //     numberFrame.textContent = parseInt(numberDisplay).toLocaleString('en-US');
+                // }
+                // if(currentValue != "") {
+                //     numInputs = [];
+                //     numInputs.push(input);
+                //     //dnumberDisplay += input;
+                //     numberDisplay = numInputs.join("");
+                //     numberFrame.textContent = parseInt(numberDisplay).toLocaleString('en-US');
+                // }
            }
 
            if(numberDisplay.length > 10) {
@@ -116,6 +135,9 @@
         function calcTracker(sign) {
             calcDisplay.push(currentValue);
             if(sign == "plus") {calcDisplay.push("+");}
+            if(sign == "minus") {calcDisplay.push("-");}
+            if(sign == "divide") {calcDisplay.push("/");}
+            if(sign == "multiply") {calcDisplay.push("x");}
             calcTrack.textContent = calcDisplay.join("");
         }
 
@@ -124,22 +146,30 @@
             if(currentValue != "") {nextValue = numberDisplay;};
             if(currentValue == "") { currentValue = numberDisplay;};
             calcTracker('plus');
+            numInputs = [];
             console.log({currentValue});
             console.log({nextValue});
-        
-
         }
 
         function subtract() {
-
+            if(currentValue != "") {nextValue = numberDisplay;};
+            if(currentValue == "") { currentValue = numberDisplay;};
+            calcTracker('minus');
+            numInputs = [];
         }
 
         function multiply() {
-
+            if(currentValue != "") {nextValue = numberDisplay;};
+            if(currentValue == "") { currentValue = numberDisplay;};
+            calcTracker('multiply');
+            numInputs = [];
         }
 
         function divide() {
-
+            if(currentValue != "") {nextValue = numberDisplay;};
+            if(currentValue == "") { currentValue = numberDisplay;};
+            calcTracker('divide');
+            numInputs = [];
         }
 
         function clear() {
