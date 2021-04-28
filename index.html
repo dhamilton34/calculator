@@ -18,12 +18,12 @@
         </div>
         <div class="button-container">
             <div class="buttons">
-                <button class="btn operator" id="percent">&percnt;</i></button>
+                <button class="btn operator" id="modulus">&percnt;</i></button>
                 <button class="btn operator" id="ce">CE</button>
                 <button class="btn operator" id="clear">C</button>
                 <button class="btn operator" id="del"><i class="fas fa-backspace"></i></button>
                 <button class="btn operator" id="one-over-x">&sup1;/&#119909;</button>
-                <button class="btn operator" id="x-squred">&#119909;&sup2;</button>
+                <button class="btn operator" id="x-squared">&#119909;&sup2;</button>
                 <button class="btn operator" id="sqrt">&sup2;&Sqrt;&#119909;</i></button>
                 <button class="btn operator" id="divide">&divide;</i></button>
                 <button class="btn number" id="7">7</button>
@@ -53,10 +53,10 @@
         let calcDisplay = [];
         let currentValue = "";
         let nextValue = "";
+        let operand = "";
         const numberFrame = document.querySelector(".number-frame");
         const calcTrack = document.querySelector(".calc-tracker");
         
-       
         //Adds EventListeners to all number buttons => Calls number function
         const numberKeys = document.querySelectorAll(".number")
             numberKeys.forEach((button) => {
@@ -75,26 +75,9 @@
                     
                     console.log(button.id);
                     //operator(button.id);
-                    window[button.id]();
+                    operate(button.id, currentValue, nextValue);
                 });
             });
-
-
-        // function operate(operator, a, b) {
-            
-        // }
-
-        // /function operator(operation) {
-           
-
-        //    /* if(operation =="clear") {clear();};
-        //     if(operation =="del") {del();};
-        //     if(operation =="add") {add();};
-        //     if(operation =="equal") {equal();};*/
-         
-
-
-        // }
 
         function number(input) {
             
@@ -141,35 +124,79 @@
             calcTrack.textContent = calcDisplay.join("");
         }
 
-        function add() {
+        function assignValues() {
             console.log({currentValue});
             if(currentValue != "") {nextValue = numberDisplay;};
             if(currentValue == "") { currentValue = numberDisplay;};
+            if(currentValue != "" && nextValue != "") {
+                 currentValue += nextValue;
+                 nextValue = numberDisplay
+                
+                };
             calcTracker('plus');
             numInputs = [];
             console.log({currentValue});
             console.log({nextValue});
         }
 
-        function subtract() {
-            if(currentValue != "") {nextValue = numberDisplay;};
-            if(currentValue == "") { currentValue = numberDisplay;};
+        function operate(operand, a, b) {
+           assignValues();
+           console.log({operand});
+           window[operand](a, b);
+        }
+
+        function add(a, b) {
+            calcTracker('plus');
+            numInputs = [];
+             return a + b;
+        }
+
+        function subtract(a, b) {
             calcTracker('minus');
             numInputs = [];
+            return a - b;
         }
 
-        function multiply() {
-            if(currentValue != "") {nextValue = numberDisplay;};
-            if(currentValue == "") { currentValue = numberDisplay;};
+        function multiply(a, b) {
             calcTracker('multiply');
             numInputs = [];
+            return a * b;
         }
 
-        function divide() {
-            if(currentValue != "") {nextValue = numberDisplay;};
-            if(currentValue == "") { currentValue = numberDisplay;};
+        function divide(a, b) {
             calcTracker('divide');
             numInputs = [];
+            return a / b;
+        }
+
+        function sqrt(a) {
+            calcTracker('sqrt');
+            numInputs = [];
+            return sqrt(a);
+        }
+
+        function oneOverX(a) {
+            calcTracker('one-over-x');
+            numInputs = [];
+            return 1/a;
+        }
+
+        function xSquared(a) {
+            calcTracker('x-squared');
+            numInputs = [];
+            return a**2;
+        }
+
+        function modulus(a, b) {
+            calcTracker('modulus');
+            numInputs = [];
+            return a % b
+        }
+
+        function equals() {
+            calcTracker('equals');
+            numInputs = [];
+            
         }
 
         function clear() {
@@ -190,9 +217,6 @@
             console.log(numInputs);
             console.log(numberDisplay);
         }
-       
-
-
     </script>
 </body>
 </html>
