@@ -41,13 +41,14 @@
                 <button class="btn operator" id="plus-minus">+/-</button>
                 <button class="btn number" id="0">0</button>
                 <button class="btn number" id=".">&period;</button>
-                <button class="btn operator" id="equal">&equals;</i></button>
+                <button class="btn " id="equal">&equals;</i></button>
             </div>
         </div>  
     </div>
     
     
     <script>
+        //VARIABLES//////////////////////////////
         let numberDisplay = "";
         let numInputs = [];
         let calcDisplay = [];
@@ -57,15 +58,14 @@
         const numberFrame = document.querySelector(".number-frame");
         const calcTrack = document.querySelector(".calc-tracker");
         
-        //Adds EventListeners to all number buttons => Calls number function
+        //EVENT LISTENERS////////////////////////
+        //Adds EventListeners to all number buttons => Calls displayNumber function
         const numberKeys = document.querySelectorAll(".number")
             numberKeys.forEach((button) => {
 
                 button.addEventListener('click', () => {
-                    console.log(button.id);
                     let value = parseInt(button.id);
-                    console.log({value});
-                    number(value);
+                    displayNumber(value);
                 });
             });
 
@@ -74,39 +74,28 @@
             operatorKeys.forEach((button) => {
 
                 button.addEventListener('click', () => {
-                    
                     let operand = button.id;
-                    console.log(button.id);
                     console.log({operand});
-                    //operator(button.id);
                     operate(operand, currentValue, nextValue);
-
                 });
             });
 
-        function number(input) {
+        //Adds EventListeners to equals button => Calls equals function
+        const equalsKey = document.querySelectorAll("#equal")
+            equalsKey.forEach((button) => {
+
+                button.addEventListener('click', () => {
+                    equals();
+                });
+            });
+
+        //MAIN FUNCIONS//////////////////////////
+        function displayNumber(value) {
             
            if(numberDisplay.length < 15) {
-               
-                    numInputs.push(input);
-                    //dnumberDisplay += input;
-                    numberDisplay = numInputs.join("");
-                    numberFrame.textContent = parseInt(numberDisplay).toLocaleString('en-US');
-                
-              
-                // if(currentValue == "") {
-                //     numInputs.push(input);
-                //     //dnumberDisplay += input;
-                //     numberDisplay = numInputs.join("");
-                //     numberFrame.textContent = parseInt(numberDisplay).toLocaleString('en-US');
-                // }
-                // if(currentValue != "") {
-                //     numInputs = [];
-                //     numInputs.push(input);
-                //     //dnumberDisplay += input;
-                //     numberDisplay = numInputs.join("");
-                //     numberFrame.textContent = parseInt(numberDisplay).toLocaleString('en-US');
-                // }
+                numInputs.push(value);
+                numberDisplay = numInputs.join("");
+                numberFrame.textContent = parseInt(numberDisplay).toLocaleString('en-US');
            }
 
            if(numberDisplay.length > 10) {
@@ -116,7 +105,8 @@
            if(numberDisplay.length > 13) {
                numberFrame.style.fontSize = "3em";
            }
-           console.log({numInputs});
+           console.log({currentValue});
+           console.log({nextValue});
            console.log({numberDisplay});
         }
 
@@ -134,21 +124,22 @@
             if(currentValue != "") {nextValue = numberDisplay;};
             if(currentValue == "") { currentValue = numberDisplay;};
             if(currentValue != "" && nextValue != "") {
-                 currentValue += nextValue;
-                 nextValue = numberDisplay
-                
+                 currentValue = parseInt(currentValue) + parseInt(nextValue);
+                 nextValue = parseInt(numberDisplay);
+                 displayNumber(currentValue);
                 };
-            calcTracker('plus');
+            //calcTracker('plus');
             numInputs = [];
             console.log({currentValue});
             console.log({nextValue});
+            
         }
 
         function operate(operand, a, b) {
             let answer;
             assignValues();
-            
-            
+    
+            //add Calctracker()
             console.log({operand});
             if(operand == "add") { answer = add(a, b); };
             if(operand == "subtract") { answer = subtract(a, b); };
@@ -159,62 +150,48 @@
             if(operand == "x-squared") { answer = xSquared(a); };
             if(operand == "modulus") { answer = modulus(a, b); };
             if(operand == "clear") { clear(); };
-            console.log(answer);
+            if(operand == "equals") { equals(currentValue, nextValue); };
+
+            if(nextValue != "") {calcTracker(operand);};
+            console.log("Operate Function: " + answer);
             return answer;
         }
-
+// I took out numInputs = []; and calcTracker('operand')
+        
         function add(a, b) {
-            calcTracker('plus');
-            numInputs = [];
-             return parseInt(a) + parseInt(b);
+             return a + b;
         }
 
         function subtract(a, b) {
-            calcTracker('minus');
-            numInputs = [];
             return a - b;
         }
 
         function multiply(a, b) {
-            calcTracker('multiply');
-            numInputs = [];
             return a * b;
         }
 
         function divide(a, b) {
-            calcTracker('divide');
-            numInputs = [];
             return a / b;
         }
 
         function sqrt(a) {
-            calcTracker('sqrt');
-            numInputs = [];
             return Math.sqrt(a);
         }
 
         function oneOverX(a) {
-            calcTracker('one-over-x');
-            numInputs = [];
             return 1/a;
         }
 
         function xSquared(a) {
-            calcTracker('x-squared');
-            numInputs = [];
             return a**2;
         }
 
         function modulus(a, b) {
-            calcTracker('modulus');
-            numInputs = [];
             return a % b
         }
 
         function equals() {
-            calcTracker('equals');
-            numInputs = [];
-            
+           //return currentValue + numberDisplay;
         }
 
         function clear() {
