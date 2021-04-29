@@ -63,7 +63,9 @@
 
                 button.addEventListener('click', () => {
                     console.log(button.id);
-                    number(button.id);
+                    let value = parseInt(button.id);
+                    console.log({value});
+                    number(value);
                 });
             });
 
@@ -73,9 +75,12 @@
 
                 button.addEventListener('click', () => {
                     
+                    let operand = button.id;
                     console.log(button.id);
+                    console.log({operand});
                     //operator(button.id);
-                    operate(button.id, currentValue, nextValue);
+                    operate(operand, currentValue, nextValue);
+
                 });
             });
 
@@ -140,15 +145,28 @@
         }
 
         function operate(operand, a, b) {
-           assignValues();
-           console.log({operand});
-           window[operand](a, b);
+            let answer;
+            assignValues();
+            
+            
+            console.log({operand});
+            if(operand == "add") { answer = add(a, b); };
+            if(operand == "subtract") { answer = subtract(a, b); };
+            if(operand == "multiply") { answer = multiply(a, b); };
+            if(operand == "divide") { answer = divide(a, b); };
+            if(operand == "sqrt") { answer = sqrt(a); };
+            if(operand == "one-over-x") { answer = oneOverX(a); };
+            if(operand == "x-squared") { answer = xSquared(a); };
+            if(operand == "modulus") { answer = modulus(a, b); };
+            if(operand == "clear") { clear(); };
+            console.log(answer);
+            return answer;
         }
 
         function add(a, b) {
             calcTracker('plus');
             numInputs = [];
-             return a + b;
+             return parseInt(a) + parseInt(b);
         }
 
         function subtract(a, b) {
@@ -172,7 +190,7 @@
         function sqrt(a) {
             calcTracker('sqrt');
             numInputs = [];
-            return sqrt(a);
+            return Math.sqrt(a);
         }
 
         function oneOverX(a) {
