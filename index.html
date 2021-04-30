@@ -65,6 +65,7 @@
 
                 button.addEventListener('click', () => {
                     let value = parseInt(button.id);
+                    assignValues();
                     displayNumber(value);
                 });
             });
@@ -74,20 +75,21 @@
             operatorKeys.forEach((button) => {
 
                 button.addEventListener('click', () => {
-                    let operand = button.id;
+                    operand = button.id;
                     console.log({operand});
                     operate(operand, currentValue, nextValue);
                 });
             });
 
-        //Adds EventListeners to equals button => Calls equals function
-        const equalsKey = document.querySelectorAll("#equal")
-            equalsKey.forEach((button) => {
+        // //Adds EventListeners to equals button => Calls equals function
+        // const equalsKey = document.querySelectorAll("#equal")
+        //     equalsKey.forEach((button) => {
 
-                button.addEventListener('click', () => {
-                    equals();
-                });
-            });
+        //         button.addEventListener('click', () => {
+        //             //equals();
+        //             operate(operand, currentValue, nextValue);
+        //         });
+        //     });
 
         //MAIN FUNCIONS//////////////////////////
         function displayNumber(value) {
@@ -121,10 +123,10 @@
 
         function assignValues() {
             console.log({currentValue});
-            if(currentValue != "") {nextValue = numberDisplay;};
             if(currentValue == "") { currentValue = numberDisplay;};
+            if(currentValue != "") {nextValue = numberDisplay;};
             if(currentValue != "" && nextValue != "") {
-                 currentValue = parseInt(currentValue) + parseInt(nextValue);
+                 currentValue = operate(operand, currentValue, nextValue);
                  nextValue = parseInt(numberDisplay);
                  displayNumber(currentValue);
                 };
@@ -137,7 +139,7 @@
 
         function operate(operand, a, b) {
             let answer;
-            assignValues();
+            //assignValues();
     
             //add Calctracker()
             console.log({operand});
@@ -150,7 +152,7 @@
             if(operand == "x-squared") { answer = xSquared(a); };
             if(operand == "modulus") { answer = modulus(a, b); };
             if(operand == "clear") { clear(); };
-            if(operand == "equals") { equals(currentValue, nextValue); };
+            //if(operand == "equals") { equals(currentValue, nextValue); };
 
             if(nextValue != "") {calcTracker(operand);};
             console.log("Operate Function: " + answer);
@@ -190,9 +192,11 @@
             return a % b
         }
 
-        function equals() {
-           //return currentValue + numberDisplay;
-        }
+        // function equals() {
+        //    let value = operate(operand, currentValue, nextValue);
+        //    console.log({value});
+        //    return value
+        // }
 
         function clear() {
             numInputs = [];
@@ -200,6 +204,7 @@
             numberDisplay = "";
             currentValue = "";
             nextValue = "";
+            operate = "";
             numberFrame.textContent = numberDisplay;
             calcTrack.textContent = currentValue;
         }
